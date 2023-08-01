@@ -1,3 +1,5 @@
+.DS_Store
+
 # installed packages
 node_modules
 
@@ -5,4 +7,6 @@ node_modules
 # future key
 
 01_Backend/03_Databases/project-4/wizardassignment.md
-01_Backend/03_Databases/project-4/assignment.md.DS_Store
+01_Backend/03_Databases/project-4/assignment.md
+
+
