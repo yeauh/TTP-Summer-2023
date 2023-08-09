@@ -14,8 +14,7 @@ const layout = (bodyContent) =>
 const allPeople = (people) => `
   <h1>All People</h1>
   <main>
-    ${people
-      .map((person) => {
+    ${people.map((person) => {
         return `<section><a id="${person.id}" href="/people/${person.id}">${person.name}</a> is <em>${person.age}</em> years old</section>`;
       })
       .join("")}
