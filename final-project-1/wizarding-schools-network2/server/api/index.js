@@ -1,36 +1,49 @@
 "use strict";
 const router = require("express").Router();
-const db = require("../db/db");
+const { wizardingSchools, student} = require("../db/index");
 
 // require your database and place your routes here
-// const express = require('express')
-const app = router();
 
-const layout = (bodyContent) =>
-  `<html><head></head><body>${bodyContent}</body></html>`;
+router.get("/students", async (req, res, next) => {
+  try {
+    const students = await student.findAll();
+    res.send(students);
+  } catch (err) {
+    next(err);
+  }
+});
 
-  const allSchools = (school) => `
-  <h1>All Schools</h1>
-  <main>
-    ${school.map((campus) => {
-        return `<section><a id="${campus.id}" href="/campus/${campus.id}">${campus.name}</a> is <em>${campus.age}</em> years old</section>`;
-      })
-      .join("")}
-  </main>
-`;
-app.get('/', (req, res) => {
-  res.send('welcome to the main page')
-})
+router.get("/students/:id", async (req, res, next) => {
+  try {
+    const student = await student.findOne({
+      where: { id: req.params.id },
+      include: wizardingSchools,
+    });
 
+    console.log(student);
 
-app.get("/schools", (req, res) => {
-    res.send(layout(allSchools(campus)));
-  });
-  
-  app.get("/schools/:id", (req, res) => {
-    const { id } = req.params;
-    const campus = campus.find((campus) => parseInt(id) === campus.id);
-  
-    res.send(layout(singlePerson(campus)));
-  });
+    res.send(student);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/schools", async (req, res, next) => {
+  try {
+    const student = await wizardingSchools.findAll();
+    res.send(student);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/schools/:id", async (req, res, next) => {
+  try {
+    const student = await wizardingSchools.findByPk(req.params.id);
+    res.send(student);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

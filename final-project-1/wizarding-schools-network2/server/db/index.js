@@ -31,7 +31,7 @@ const wizardingSchools = db.define("wizardingSchools", {
 });
 
 
-/* 
+/*
   firstName - not empty or null
   lastName - not empty or null
   email - not empty or null; must be a valid email
@@ -90,4 +90,3 @@ module.exports = {
   student,
   wizardingSchools,
 };
-// await db.sync({ force: true });
